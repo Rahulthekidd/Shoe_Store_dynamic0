@@ -1,0 +1,230 @@
+package PACKAGE_HERE;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Shoe {
+    private static int price;
+    private static String[] nikeShoes = new String[10];
+    private static String[] adidasShoes = new String[10];
+    private static String[] pumaShoes = new String[10];
+    private static String[] reebokShoes = new String[10];
+
+    private static String[] addressOne = new String[10];
+    private static String[] addressTwo = new String[10];
+    private static String[] name = new String[10];
+    private static String[] state = new String[10];
+    private static int[] pincode = new int[10];
+    private static long[] ccNum = new long[10];
+    private static int[] ccCvv = new int[10];
+    private static String[] ccExpiry = new String[10];
+
+    private static String adminPassword = "R78060NF44";
+
+    public static void main(String[] args) {
+        // Initialize your data, e.g., nikeShoes, adidasShoes, etc.
+        // ...
+
+        admin();
+    }
+
+    public static void connect(int flag) {
+        switch (flag) {
+            case 1:
+                Nike();
+                break;
+            case 2:
+                Adidas();
+                break;
+            case 3:
+                Puma();
+                break;
+            case 4:
+                // Reebok();
+                break;
+            default:
+                System.out.println("This brand is not available!!");
+        }
+    }
+
+    public static void name() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Hello, what's your name: ");
+        name[0] = scanner.next();
+        System.out.println("Hello, " + name[0] + ". What shoes are you interested in? Check the list below.\n");
+    }
+
+    public static void Selection() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Kindly enter your choice: ");
+        int choice = scanner.nextInt();
+        if (choice >= 1 && choice <= 10) {
+            String selected = nikeShoes[choice - 1];
+            System.out.println("You have selected " + selected + "\n");
+        }
+    }
+
+    public static void admin() {
+        try {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Are you an admin (y/n):");
+            String add = scanner.next();
+            if (add.equalsIgnoreCase("y")) {
+                System.out.println("What is the password to the admin panel: ");
+                String password = scanner.next();
+                if (password.length() == 10 && password.equals(adminPassword)) {
+                    System.out.println("Success");
+                    panel();
+                } else {
+                    System.out.println("You failed the login, and you had one try. Terminating...");
+                }
+            } else {
+                System.out.println("Sequence terminated!\n");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void Nike() {
+        System.out.println("The available Nike shoe models are: \n");
+
+        for (int i = 0; i < 10; i++) {
+            int n = i + 1;
+            System.out.println(n + ". " + nikeShoes[i] + " - " + price + " INR");
+        }
+    }
+
+    public static void Adidas() {
+        System.out.println("The available Adidas shoe models are: \n");
+
+        for (int i = 0; i < 10; i++) {
+            int n = i + 1;
+            System.out.println(n + ". " + adidasShoes[i] + " - " + price + " INR");
+        }
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Kindly enter your choice: ");
+        int choice = scanner.nextInt();
+        if (choice >= 1 && choice <= 10) {
+            String selected = adidasShoes[choice - 1];
+            System.out.println("You have selected " + selected + "\n");
+        }
+    }
+
+    public static void Puma() {
+        System.out.println("The available Puma shoe models are: \n");
+
+        for (int i = 0; i < 10; i++) {
+            int n = i + 1;
+            System.out.println(n + ". " + pumaShoes[i] + " - " + price + " INR");
+        }
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Kindly enter your choice: ");
+        int choice = scanner.nextInt();
+        if (choice >= 1 && choice <= 10) {
+            String selected = pumaShoes[choice - 1];
+            System.out.println("You have selected " + selected + "\n");
+        }
+    }
+
+    // Add other brand methods (e.g., Reebok)
+
+    public static void panel() {
+        ArrayList<Shoe> shoeRecord = new ArrayList<Shoe>();
+
+        @SuppressWarnings("resource")
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("How many records do you want to insert and in which brand (e.g., 'nike 10'): ");
+        String input = sc.nextLine();
+        String[] parts = input.split(" ");
+
+        if (parts.length != 2) {
+            System.out.println("Invalid input format. Please provide the brand and the number of records.");
+            return;
+        }
+
+        String brand = parts[0];
+        int numberOfRecords = Integer.parseInt(parts[1]);
+
+        if (brand.equalsIgnoreCase("nike")) {
+            for (int i = 0; i < numberOfRecords; i++) {
+                System.out.println("Enter shoe name for Nike: ");
+                String shoeName = sc.next();
+                System.out.println("Enter shoe price for Nike: ");
+                int shoePrice = sc.nextInt();
+                sc.nextLine(); // Consume the newline character
+
+                // Create a new Shoe object and add it to the shoeRecord ArrayList
+                Shoe nikeShoe = new Shoe();
+                nikeShoe.setName(nikeShoes, shoePrice, shoeName);
+                nikeShoe.setPrice(ccCvv, shoePrice, shoePrice);
+                shoeRecord.add(nikeShoe);
+            }
+        } else if (brand.equalsIgnoreCase("adidas")) {
+            // Similar logic for Adidas
+            for (int i = 0; i < numberOfRecords; i++) {
+                System.out.println("Enter shoe name for Adidas: ");
+                String shoeName = sc.next();
+                System.out.println("Enter shoe price for Adidas: ");
+                int shoePrice = sc.nextInt();
+                sc.nextLine(); // Consume the newline character
+
+                // Create a new Shoe object and add it to the shoeRecord ArrayList
+                Shoe adidasShoe = new Shoe();
+                adidasShoe.setName(adidasShoes, shoePrice, shoeName);
+                adidasShoe.setPrice(ccCvv, shoePrice, shoePrice);
+                shoeRecord.add(adidasShoe);
+            }
+        } else if (brand.equalsIgnoreCase("puma")) {
+            // Similar logic for Puma
+            for (int i = 0; i < numberOfRecords; i++) {
+                System.out.println("Enter shoe name for Puma: ");
+                String shoeName = sc.next();
+                System.out.println("Enter shoe price for Puma: ");
+                int shoePrice = sc.nextInt();
+                sc.nextLine(); // Consume the newline character
+
+                // Create a new Shoe object and add it to the shoeRecord ArrayList
+                Shoe pumaShoe = new Shoe();
+                pumaShoe.setName(pumaShoes, shoePrice, shoeName);
+                pumaShoe.setPrice(ccCvv, shoePrice, shoePrice);
+                shoeRecord.add(pumaShoe);
+            }
+        } else if (brand.equalsIgnoreCase("reebok")) {
+            // Similar logic for Reebok
+            for (int i = 0; i < numberOfRecords; i++) {
+                System.out.println("Enter shoe name for Reebok: ");
+                String shoeName = sc.next();
+                System.out.println("Enter shoe price for Reebok: ");
+                int shoePrice = sc.nextInt();
+                sc.nextLine(); // Consume the newline character
+
+                // Create a new Shoe object and add it to the shoeRecord ArrayList
+                Shoe reebokShoe = new Shoe();
+                reebokShoe.setName(reebokShoes, shoePrice, shoeName);
+                reebokShoe.setPrice(ccCvv, shoePrice, shoePrice);
+                shoeRecord.add(reebokShoe);
+            }
+        } else {
+            System.out.println("Invalid brand name. Supported brands: Nike, Adidas, Puma, Reebok.");
+        }
+    }
+    public void setName(String[] brandShoes, int index, String shoeName) {
+        if (index >= 0 && index < brandShoes.length) {
+            brandShoes[index] = shoeName;
+        } else {
+            System.out.println("Invalid index. Shoe not set.");
+        }
+    }
+    
+    public void setPrice(int[] brandPrices, int index, int shoePrice) {
+        if (index >= 0 && index < brandPrices.length) {
+            brandPrices[index] = shoePrice;
+        } else {
+            System.out.println("Invalid index. Price not set.");
+        }
+    }
+}
